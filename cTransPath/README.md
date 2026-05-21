@@ -53,7 +53,7 @@ python run_inference.py --model ctranspath --model-path ./model/ctranspath.pth
 ### RetCCL
 
 ```bash
-python run_inference.py --model retccl --model-path ./model/best_ckpt.pth
+python run_inference.py --model retccl --model-path ./model/retccl.pth
 ```
 
 출력:

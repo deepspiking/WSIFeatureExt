@@ -26,7 +26,7 @@ from torch.utils.data import Dataset, DataLoader
 TILES_ROOT = Path("./datas/tiles")
 FEATURES_OUT = Path("./features")
 CTRANSPATH_MODEL_PATH = Path("./model/ctranspath.pth")
-RETCCL_MODEL_PATH = Path("./model/best_ckpt.pth")
+RETCCL_MODEL_PATH = Path("./model/retccl.pth")
 
 BATCH_SIZE = 32
 DEVICE = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
