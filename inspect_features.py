@@ -9,9 +9,11 @@ for pt_path in sorted(FEATURES_DIR.glob("*.pt")):
     data = torch.load(pt_path, map_location="cpu")
     features   = data["features"]       # (N, 768)
     tile_paths = data["tile_paths"]
+    model_name = data.get("model", "unknown")
 
     print(f"{'='*60}")
     print(f"Slide   : {pt_path.stem}")
+    print(f"Model   : {model_name}")
     print(f"{'='*60}")
     print(f"Tiles   : {features.shape[0]}")
     print(f"Feat dim: {features.shape[1]}")
