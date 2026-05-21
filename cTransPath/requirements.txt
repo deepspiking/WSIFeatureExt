@@ -1,0 +1,9 @@
+torch==2.8.0
+torchvision==0.23.0
+timm==0.5.4
+openslide-python==1.4.3
+openslide-bin==4.0.0.13
+Pillow==12.2.0
+numpy==2.4.6
+pandas==3.0.3
+matplotlib==3.10.9

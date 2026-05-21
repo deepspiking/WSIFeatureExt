@@ -1,0 +1,86 @@
+{
+  "vendor": "aperio",
+  "level_count": 3,
+  "level_dimensions": [
+    [
+      57767,
+      21886
+    ],
+    [
+      14441,
+      5471
+    ],
+    [
+      3610,
+      1367
+    ]
+  ],
+  "level_downsamples": [
+    1.0,
+    4.000286652864211,
+    16.00609023135361
+  ],
+  "mpp_x": "0.49419999999999997",
+  "mpp_y": "0.49419999999999997",
+  "objective_power": "20",
+  "dimensions": [
+    57767,
+    21886
+  ],
+  "properties": {
+    "aperio.AppMag": "20",
+    "aperio.DSR ID": "aperio04",
+    "aperio.Date": "01/05/18",
+    "aperio.DisplayColor": "0",
+    "aperio.Exposure Scale": "0.000001",
+    "aperio.Exposure Time": "109",
+    "aperio.Filename": "120525",
+    "aperio.Focus Offset": "-0.000500",
+    "aperio.ICC Profile": "ScanScope v1",
+    "aperio.ImageID": "120525",
+    "aperio.Left": "19.584814",
+    "aperio.LineAreaXOffset": "0.023001",
+    "aperio.LineAreaYOffset": "-0.006920",
+    "aperio.LineCameraSkew": "0.001659",
+    "aperio.MPP": "0.4942",
+    "aperio.OriginalHeight": "21986",
+    "aperio.OriginalWidth": "58928",
+    "aperio.ScanScope ID": "SS1553",
+    "aperio.StripeWidth": "2032",
+    "aperio.Time": "11:06:27",
+    "aperio.Time Zone": "GMT-05:00",
+    "aperio.Top": "17.830650",
+    "aperio.User": "1967c4f5-28b3-47c6-81db-9884d27d4e0b",
+    "openslide.associated.label.height": "716",
+    "openslide.associated.label.width": "666",
+    "openslide.associated.macro.height": "629",
+    "openslide.associated.macro.width": "1600",
+    "openslide.associated.thumbnail.height": "387",
+    "openslide.associated.thumbnail.width": "1024",
+    "openslide.comment": "Aperio Image Library v12.0.11 \r\n58928x21986 [0,100 57767x21886] (240x240) JPEG/RGB Q=70|AppMag = 20|StripeWidth = 2032|ScanScope ID = SS1553|Filename = 120525|Date = 01/05/18|Time = 11:06:27|Time Zone = GMT-05:00|User = 1967c4f5-28b3-47c6-81db-9884d27d4e0b|MPP = 0.4942|Left = 19.584814|Top = 17.830650|LineCameraSkew = 0.001659|LineAreaXOffset = 0.023001|LineAreaYOffset = -0.006920|Focus Offset = -0.000500|DSR ID = aperio04|ImageID = 120525|Exposure Time = 109|Exposure Scale = 0.000001|DisplayColor = 0|OriginalWidth = 58928|OriginalHeight = 21986|ICC Profile = ScanScope v1",
+    "openslide.icc-size": "141992",
+    "openslide.level-count": "3",
+    "openslide.level[0].downsample": "1",
+    "openslide.level[0].height": "21886",
+    "openslide.level[0].tile-height": "240",
+    "openslide.level[0].tile-width": "240",
+    "openslide.level[0].width": "57767",
+    "openslide.level[1].downsample": "4.0002866528642107",
+    "openslide.level[1].height": "5471",
+    "openslide.level[1].tile-height": "240",
+    "openslide.level[1].tile-width": "240",
+    "openslide.level[1].width": "14441",
+    "openslide.level[2].downsample": "16.00609023135361",
+    "openslide.level[2].height": "1367",
+    "openslide.level[2].tile-height": "240",
+    "openslide.level[2].tile-width": "240",
+    "openslide.level[2].width": "3610",
+    "openslide.mpp-x": "0.49419999999999997",
+    "openslide.mpp-y": "0.49419999999999997",
+    "openslide.objective-power": "20",
+    "openslide.quickhash-1": "551e5efe4c2aad0e40d7c7861a5495d545039dbd3868852f5b97740eff9c6a35",
+    "openslide.vendor": "aperio",
+    "tiff.ImageDescription": "Aperio Image Library v12.0.11 \r\n58928x21986 [0,100 57767x21886] (240x240) JPEG/RGB Q=70|AppMag = 20|StripeWidth = 2032|ScanScope ID = SS1553|Filename = 120525|Date = 01/05/18|Time = 11:06:27|Time Zone = GMT-05:00|User = 1967c4f5-28b3-47c6-81db-9884d27d4e0b|MPP = 0.4942|Left = 19.584814|Top = 17.830650|LineCameraSkew = 0.001659|LineAreaXOffset = 0.023001|LineAreaYOffset = -0.006920|Focus Offset = -0.000500|DSR ID = aperio04|ImageID = 120525|Exposure Time = 109|Exposure Scale = 0.000001|DisplayColor = 0|OriginalWidth = 58928|OriginalHeight = 21986|ICC Profile = ScanScope v1",
+    "tiff.ResolutionUnit": "inch"
+  }
+}
