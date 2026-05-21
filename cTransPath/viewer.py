@@ -35,9 +35,10 @@ PREVIEW_SIZE = 300   # 우측 상단 미리보기 크기 (px)
 
 def load_slide(pt_path: Path):
     data = torch.load(pt_path, map_location="cpu")
-    features   = data["features"].numpy()   # (N, 768)
+    features = data["features"].numpy()
     tile_paths = [Path(p) for p in data["tile_paths"]]
-    return features, tile_paths
+    model_name = data.get("model", "unknown")
+    return features, tile_paths, model_name
 
 
 def pick_slide(name_hint: str | None) -> Path:
@@ -61,7 +62,7 @@ class Viewer(tk.Tk):
         self.title(f"Tile-Feature Viewer  —  {pt_path.stem}")
         self.configure(bg="#1e1e2e")
 
-        self.features, self.tile_paths = load_slide(pt_path)
+        self.features, self.tile_paths, self.model_name = load_slide(pt_path)
         self.n_tiles = len(self.tile_paths)
         self.selected = None
 
@@ -136,9 +137,9 @@ class Viewer(tk.Tk):
         self.stats_label.pack(anchor="w", pady=(4, 8))
 
         # feature bar chart
-        feat_header = tk.Label(right, text="Feature Vector  (768 dims)",
-                                bg="#1e1e2e", fg="#cdd6f4",
-                                font=("Helvetica", 12, "bold"))
+        feat_header = tk.Label(right, text=f"Feature Vector ({self.features.shape[1]} dims, {self.model_name})",
+                                 bg="#1e1e2e", fg="#cdd6f4",
+                                 font=("Helvetica", 12, "bold"))
         feat_header.pack(anchor="w")
 
         self.fig, self.ax = plt.subplots(figsize=(6, 2.4))
