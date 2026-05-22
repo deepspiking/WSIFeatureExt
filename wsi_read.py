@@ -89,11 +89,13 @@ def process_svs_file(
     spec = extract_slide_spec(slide)
 
     spec_path = slide_output_dir / "specification.json"
+    overview_path = slide_output_dir / "overview.png"
 
-    with open(spec_path, "w") as f:
-        json.dump(spec, f, indent=2)
+    thumb = slide.get_thumbnail((1200, 1200)).convert("RGB")
+    thumb.save(overview_path)
 
     print(f"Saved specification -> {spec_path}")
+    print(f"Saved overview -> {overview_path}")
 
     mpp_x = float(slide.properties.get(openslide.PROPERTY_NAME_MPP_X, 0))
     if mpp_x <= 0:
@@ -111,6 +113,22 @@ def process_svs_file(
     cols = max((width - read_size) // read_stride + 1, 0)
     rows = max((height - read_size) // read_stride + 1, 0)
 
+    spec["extraction"] = {
+        "target_mpp": target_mpp,
+        "patch_size": patch_size,
+        "stride": stride,
+        "read_size": read_size,
+        "read_stride": read_stride,
+        "level0_width": width,
+        "level0_height": height,
+        "rows": rows,
+        "cols": cols,
+        "outer_border_dropped": True,
+    }
+
+    with open(spec_path, "w") as f:
+        json.dump(spec, f, indent=2)
+
     print(f"Slide MPP: {mpp_x:.4f}  →  read_size: {read_size}px  →  effective MPP: {effective_mpp:.4f}")
     print(f"Slide size: {width} x {height}")
     print(f"Tiles: {cols} x {rows}")
@@ -119,6 +137,8 @@ def process_svs_file(
 
     for row in range(rows):
         for col in range(cols):
+            if row == 0 or col == 0 or row == rows - 1 or col == cols - 1:
+                continue
 
             x = col * read_stride
             y = row * read_stride
