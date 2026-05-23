@@ -1,10 +1,10 @@
 """
-CTransPath feature extraction for WSI tiles.
+Feature extraction from WSI tiles.
 
 Pipeline:
   datas/svs/*.svs  →  [wsi_read.py]  →  datas/tiles/{slide}/tiles/*.png
-                   →  [this script]  →  features/{slide}.pt  + features/{slide}.csv
-                                        CSV columns: tile_path, row, col, feat_0 … feat_767
+                   →  [this script]  →  features/{model}/{slide}.pt + {slide}.csv
+                                        CSV columns: tile_path, row, col, feat_0 … feat_{D-1}
 """
 
 import argparse
@@ -113,6 +113,7 @@ def extract_features(model, tile_paths: list[Path], device: str, batch_size: int
 def main():
     parser = argparse.ArgumentParser(description="Unified feature extraction from tiled PNGs")
     parser.add_argument("--model", choices=["ctranspath", "retccl"], default="ctranspath")
+    parser.add_argument("--svs-dir", type=Path, default=None, help="SVS root folder. If set, processes SVS stems in this folder.")
     parser.add_argument("--tiles-root", type=Path, default=TILES_ROOT)
     parser.add_argument("--features-out", type=Path, default=FEATURES_OUT)
     parser.add_argument("--model-path", type=Path, default=None)
@@ -129,7 +130,8 @@ def main():
     if not model_path.exists():
         raise FileNotFoundError(f"Model file not found: {model_path}")
 
-    features_out.mkdir(exist_ok=True)
+    model_features_out = features_out / args.model
+    model_features_out.mkdir(parents=True, exist_ok=True)
 
     if args.model == "ctranspath":
         model = load_ctranspath_model(model_path, args.device)
@@ -137,13 +139,25 @@ def main():
         model = load_retccl_model(model_path, args.device)
     print(f"Device: {args.device}")
 
-    slide_dirs = sorted([d for d in tiles_root.iterdir() if d.is_dir()])
-    if not slide_dirs:
-        print(f"No slide directories found under {tiles_root}")
-        return
+    if args.svs_dir is not None:
+        if not args.svs_dir.exists():
+            raise FileNotFoundError(f"SVS directory not found: {args.svs_dir}")
+        svs_files = sorted(args.svs_dir.glob("*.svs"))
+        slide_names = [p.stem for p in svs_files]
+        if not slide_names:
+            print(f"No .svs files found under {args.svs_dir}")
+            return
+    else:
+        if not tiles_root.exists():
+            raise FileNotFoundError(f"Tiles root not found: {tiles_root}")
+        slide_dirs = sorted([d for d in tiles_root.iterdir() if d.is_dir()])
+        slide_names = [d.name for d in slide_dirs]
+        if not slide_names:
+            print(f"No slide directories found under {tiles_root}")
+            return
 
-    for slide_dir in slide_dirs:
-        slide_name = slide_dir.name
+    for slide_name in slide_names:
+        slide_dir = tiles_root / slide_name
         tiles_dir  = slide_dir / "tiles"
 
         tile_paths = sorted(tiles_dir.glob("*.png"))
@@ -156,7 +170,7 @@ def main():
         print(f"[{slide_name}] feature shape: {features.shape}")  # (N, 768)
 
         # .pt 저장 (학습/분석용 원본)
-        pt_path = features_out / f"{slide_name}.{args.model}.pt"
+        pt_path = model_features_out / f"{slide_name}.pt"
         torch.save({
             "features": features,
             "tile_paths": [str(p) for p in tile_paths],
@@ -178,7 +192,7 @@ def main():
         df.insert(1, "row", rows)
         df.insert(2, "col", cols)
 
-        csv_path = features_out / f"{slide_name}.{args.model}.csv"
+        csv_path = model_features_out / f"{slide_name}.csv"
         df.to_csv(csv_path, index=False)
         print(f"[{slide_name}] Saved .csv → {csv_path}")
 

@@ -9,7 +9,7 @@ datas/svs/*.svs
   -> wsi_read.py
   -> datas/tiles/{slide}/tiles/*.png
   -> run_inference.py --model {ctranspath|retccl}
-  -> features/{slide}.{model}.pt, features/{slide}.{model}.csv
+  -> features/{model}/{slide}.pt, features/{model}/{slide}.csv
 ```
 
 ## LFS
@@ -47,18 +47,28 @@ python wsi_read.py \
 ### cTransPath
 
 ```bash
-python run_inference.py --model ctranspath --model-path ./model/ctranspath.pth
+python run_inference.py \
+  --model ctranspath \
+  --model-path ./model/ctranspath.pth \
+  --svs-dir ./datas/svs \
+  --tiles-root ./datas/tiles \
+  --features-out ./features
 ```
 
 ### RetCCL
 
 ```bash
-python run_inference.py --model retccl --model-path ./model/retccl.pth
+python run_inference.py \
+  --model retccl \
+  --model-path ./model/retccl.pth \
+  --svs-dir ./datas/svs \
+  --tiles-root ./datas/tiles \
+  --features-out ./features
 ```
 
 출력:
-- `features/{slide}.ctranspath.pt`, `features/{slide}.ctranspath.csv`
-- `features/{slide}.retccl.pt`, `features/{slide}.retccl.csv`
+- `features/ctranspath/{slide}.pt`, `features/ctranspath/{slide}.csv`
+- `features/retccl/{slide}.pt`, `features/retccl/{slide}.csv`
 
 ## Utilities
 
