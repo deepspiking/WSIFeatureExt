@@ -2,7 +2,7 @@
 Feature extraction from WSI tiles.
 
 Pipeline:
-  datas/svs/*.svs  →  [wsi_read.py]  →  datas/tiles/{slide}/tiles/*.png
+  data_ex/svs/*.svs  →  [wsi_read.py]  →  data_ex/tiles/{slide}/tiles/*.png
                    →  [this script]  →  features/{model}/{slide}.pt + {slide}.csv
                                         CSV columns: tile_path, row, col, feat_0 … feat_{D-1}
 """
@@ -23,7 +23,7 @@ from torch.utils.data import Dataset, DataLoader
 # Config
 # ---------------------------------------------------------------------------
 
-TILES_ROOT = Path("./datas/tiles")
+TILES_ROOT = Path("./data_ex/tiles")
 FEATURES_OUT = Path("./features")
 CTRANSPATH_MODEL_PATH = Path("./model/ctranspath.pth")
 RETCCL_MODEL_PATH = Path("./model/retccl.pth")

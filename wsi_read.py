@@ -7,8 +7,8 @@ from PIL import Image
 import numpy as np
 
 
-INPUT_DIR = "./datas/svs"
-OUTPUT_DIR = "./datas/tiles"
+INPUT_DIR = "./data_ex/svs"
+OUTPUT_DIR = "./data_ex/tiles"
 TARGET_MPP = 1.0
 PATCH_SIZE = 224
 STRIDE = 224
